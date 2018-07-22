@@ -10,20 +10,25 @@ namespace Via_task1
    
     public class Node
     {
+        //[!] посмотри у string операцию equal и ==
         public string val;
         public Node next;
         public Node prev;
     }
-
+    
+    //[!] выделить в отдельный файл
+    //[!] выделить однонаправленный и двунаправленный списки
     class MyLinkedList
     {
+       
         public Node Head;
 
+        //[!] не работать с node а работать с value type или reference type
         /// <summary>
         /// Добавление в однонаправленный список после определенного элемена
         /// </summary>
         /// <param name="newNode"></param>
-        /// <param name="certainNode"></param>
+        /// <param name="certainNode"></param>       
         public void AddAfterRef(Node newNode, Node certainNode)
         {
             Node curNode = Head;
@@ -43,6 +48,7 @@ namespace Via_task1
         public void DoubleAfterref(Node newNode, Node certainNode)
         {
             Node curNode = Head;
+            //[!] А что для случая если certan node нет в списке?
             while (curNode != certainNode)
             {
                 curNode = curNode.next;
@@ -71,8 +77,9 @@ namespace Via_task1
         /// <param name="certainNode"></param>
         public void AddBeforeRef(Node newNode, Node certainNode)
         {
+            //[!] А что для случая если certan node нет в списке?
             Node curNode = Head;
-            Node prevNode = Head;
+            Node prevNode = Head; //[!] тут проблема с предыдущим значением 
             while (curNode != certainNode)
             {
                 prevNode = curNode;
@@ -92,7 +99,7 @@ namespace Via_task1
         public void DoubleAddBeforeref(Node newNode, Node certainNode)
         {
             Node curNode = Head;
-            Node prevNode = Head;
+            Node prevNode = Head; //[!] тут проблема с предыдущим значением 
             while (curNode!=newNode)
             {
                 prevNode = curNode;
@@ -111,7 +118,7 @@ namespace Via_task1
         public void AddInBegin(Node newNode)
         {
             newNode.next = Head;
-            newNode = Head;
+            newNode = Head; //[!] - проверь присваивание
         }
 
         /// <summary>
@@ -120,6 +127,7 @@ namespace Via_task1
         /// <param name="newNode"></param>
         public void doubleAddInBegin(Node newNode)
         {
+           //[!] head не поменяется, добалвение не произойдет
             newNode.next = Head;
             newNode = Head;
             newNode.prev = null;
@@ -131,7 +139,7 @@ namespace Via_task1
         /// <param name="newNode"></param>
         public void AddInEnd(Node newNode)
         {
-            Node curNode = Head.next;
+            Node curNode = Head.next; //[!] проверь случай с одним элементом в списке, зуб даю, что следующая строчка упадет с эксепшоном
             while (curNode.next!=null)
             {
                 curNode = curNode.next;
@@ -146,7 +154,7 @@ namespace Via_task1
         /// <param name="newNode"></param>
         public void DoubleAddInEnd(Node newNode)
         {
-            Node curNode = Head.next;
+            Node curNode = Head.next; //[!] аналогично
             while (curNode.next != null)
             {
                 curNode = curNode.next;
@@ -159,7 +167,7 @@ namespace Via_task1
         /// <summary>
         /// очистка однонапрвленного списка
         /// </summary>
-        public void ClearList()
+        public void ClearList() // [!] подумай как можно сделать проще, как оторвать все ссылки
         {
             Node curNode = Head;
             Node nextNode = curNode.next;
@@ -188,6 +196,7 @@ namespace Via_task1
             }
             curNode.next = null;
         }
+       //[!] проверь краевые условия index < 0 index > len(LinkedList)
         public Node GivenUseIndex(int index)
         {
             Node curNode = Head;
@@ -204,7 +213,7 @@ namespace Via_task1
         { 
             Node curNode = Head;
             string val = Head.val;
-            while (val != value)
+            while (val != value) //[!] это проверка по ссылке, для сравнения на равентсво содержимого используется другой оператор 
             {
                 curNode = curNode.next;
                 val = curNode.val;
@@ -214,7 +223,7 @@ namespace Via_task1
 
         public int NumberElements ()
         {
-            Node curNode = Head.next;
+            Node curNode = Head.next; //[!] настоящие программисты считают от 0, подумай как считать от 0
             int sum = 1;
             while (curNode!= null)
             {
@@ -228,8 +237,9 @@ namespace Via_task1
   
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args)//[!] выделять тесты лучше в отдельные функции 
         {
+           //[!] сосздать список, добавить в конец, добавить в начало - протестировать состояние 
             Node first = new Node();
             first.val = "Первый";
             first.prev = null;
